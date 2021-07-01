@@ -22,4 +22,4 @@ The tech stack required would be the following:
 	
 Here is the initial Entity-Relationship Diagram (ERD) for this project:
 	
-	![image](https://user-images.githubusercontent.com/79055107/124162090-093eeb00-da96-11eb-840b-9fd681bb56d7.png)
+	https://user-images.githubusercontent.com/79055107/124162090-093eeb00-da96-11eb-840b-9fd681bb56d7.png

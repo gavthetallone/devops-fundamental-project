@@ -19,3 +19,7 @@ The tech stack required would be the following:
 	- Version Control: Git 
 	- CI Server: Jenkins 
 	- Cloud server: GCP Compute Engine
+	
+Here is the initial Entity-Relationship Diagram (ERD) for this project:
+	
+	![image](https://user-images.githubusercontent.com/79055107/124162090-093eeb00-da96-11eb-840b-9fd681bb56d7.png)

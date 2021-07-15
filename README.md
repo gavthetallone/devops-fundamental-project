@@ -58,4 +58,4 @@ Here is a link to my [Scrum Board.](https://team-1624354737559.atlassian.net/jir
 	
 Here is the initial Entity-Relationship Diagram (ERD) for this project:
 	
-	![Image of ERD](./images/ERD.png)
+![Image of ERD](./images/ERD.png)

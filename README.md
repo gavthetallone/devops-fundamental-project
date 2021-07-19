@@ -18,21 +18,19 @@ The overall objective with this project is the following:
 ---
 ## Outline
 
-The application being created for this project will be a NFL fantasy football league.  
+The application being created for this project will be a NFL fantasy football league. The CRUD functionality was updated to discount user logins, as this feature was out of scope for the project. The initial CRUD outline that was planned can be found [here.](./initial-crud.md)
+
 Users will be able to:
-* **Create** an account.
-* **Create** their own NFL fantasy league where they can compete with the other players that are invited to that league.
-* **Create** a fantasy team by picking available NFL players from a list.
+* **Create** an NFL fantasy league.
+* **Create** an NFL fantasy team by picking available NFL players from a list.
 ---
-* **Read** the NFL teams that belong to the other players in that fantasy league.
-* **Read** previous and upcoming matchups between the NFL teams in their fantasy league.
+* **Read** the NFL teams that belong to a fantasy league.
+* **Read** a list of players that belong to each fantasy NFL team.
 ---
-* **Update** their team roster for upcoming matchups (e.g. move up some players from the bench).
-* **Update** their profile information.
+* **Update** team roster (e.g. Add/remove players or move up some players from the bench).
 ---
-* **Delete** their account.
-* **Delete** their fantasy team.
-* **Delete** their fantasy league (if they are the designated league owner who created the fantasy league).
+* **Delete** a fantasy team.
+* **Delete** a fantasy league.
 ---
 ## Continuous-Integration-Pipeline
 

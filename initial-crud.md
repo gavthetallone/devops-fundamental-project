@@ -1,3 +1,5 @@
+## 02/07/2021
+
 ## Outline
 
 The application being created for this project will be a NFL fantasy football league.  

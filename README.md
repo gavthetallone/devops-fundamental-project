@@ -4,7 +4,8 @@
 ## Contents
 * [Objective](#objective) 
 * [Outline](#outline) 
-* [Continuous-Integration-Pipeline](#continuous-integration-pipeline)  
+* [Continuous-Integration-Pipeline](#continuous-integration-pipeline)
+* [Risk-Assessment](#risk-assessment)  
 * [Scrum-Board](#scrum-board)
 * [Entity-Relationship-Diagram](#entity-relationship-diagram)
 ---
@@ -46,6 +47,13 @@ The tech stack required would be the following:
 	- CI Server: Jenkins 
 	- Cloud server: GCP Compute Engine
 ---
+
+## Risk-Assessment
+
+Here is a link to my [Risk Assessment](https://qalearning-my.sharepoint.com/:x:/r/personal/gwilliams_qa_com/_layouts/15/Doc.aspx?sourcedoc=%7B7FD04526-D564-496A-96F8-6422906C291D%7D&file=Risk%20Assessment.xlsx&wdOrigin=OFFICECOM-WEB.START.REC&ct=1626710319117&action=default&mobileredirect=true&wdLOR=c7EE92B46-79E5-4BBE-AB20-35CBAE3EAF72&cid=59cf5c39-c7d5-4e74-a919-d19be51b63c2)
+, where I have detailed descriptions of the potential risks and control measures associated with this project.
+
+---
 ## Scrum-Board
 
 I decided to use Jira for my Scrum Board, as I like the general layout and options it gives to the user.
@@ -57,3 +65,8 @@ Here is a link to my [Scrum Board.](https://team-1624354737559.atlassian.net/jir
 Here is the initial Entity-Relationship Diagram (ERD) for this project:
 	
 ![Image of ERD](./images/ERD.png)
+
+---
+Here is the later version of the ERD, created to reflect change in CRUD functionality where user logins are no longer required:
+
+![Image of revised ERD](./images/ERD-revised.png)

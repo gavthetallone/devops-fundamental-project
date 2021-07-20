@@ -8,25 +8,39 @@
 {% block body %}
 
     {% for team in teams %}
-        <div class = "team"> 
-            {{ team.id }} - {{ team.description }} - {{ "✔️" if team.completed else "❌" }}
-            <br>
+        <style>
+            .tab {
+                display: inline;
+                margin-left: 35px;
+            }
+        </style>
+    
+        <div class = "team">
+            <p class="tab" >
+            <span class="tab"></span>
+            <h4>{{ team.id }} - {{ team.description }} - {{ "✔️" if team.completed else "❌" }}</h4>
             {% for player in players %}
             {% if player.team_id == team.id %}
-                {{ player.name }}
+            <span class="tab"></span>
+            {{ player.name }}
+                <br>
             {% endif %}
             {% endfor %}
-            
-            <a href="{{ url_for('update', id=team.id) }}">Update</a>
+            <br>
+            <span class="tab"></span>
+            <a href="{{ url_for('update', id=team.id) }}">Update Team Name</a>
+            <br>
+            <span class="tab"></span>
             <a href="{{ url_for('delete', id=team.id) }}">Delete</a>
             <br>
     
             {% if team.completed %}
-                <a href="{{ url_for('incomplete', id=team.id) }}">Mark as Inactive</a>
+            <span class="tab"></span>
+            <a href="{{ url_for('incomplete', id=team.id) }}">Mark as Inactive</a>
             {% else %}
-                <a href="{{ url_for('complete', id=team.id) }}">Mark as Active</a>
+            <span class="tab"></span>
+            <a href="{{ url_for('complete', id=team.id) }}">Mark as Active</a>
             {% endif %}
-             
             <br>
             <br>
         </div>

@@ -1,0 +1,35 @@
+
+{% extends 'layout.html' %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block body %}
+
+    {% for team in teams %}
+        <div class = "team"> 
+            {{ team.id }} - {{ team.description }} - {{ "✔️" if team.completed else "❌" }}
+            <br>
+            {% for player in players %}
+            {% if player.team_id == team.id %}
+                {{ player.name }}
+            {% endif %}
+            {% endfor %}
+            
+            <a href="{{ url_for('update', id=team.id) }}">Update</a>
+            <a href="{{ url_for('delete', id=team.id) }}">Delete</a>
+            <br>
+    
+            {% if team.completed %}
+                <a href="{{ url_for('incomplete', id=team.id) }}">Mark as Inactive</a>
+            {% else %}
+                <a href="{{ url_for('complete', id=team.id) }}">Mark as Active</a>
+            {% endif %}
+             
+            <br>
+            <br>
+        </div>
+    {% endfor %}
+
+{% endblock body %}

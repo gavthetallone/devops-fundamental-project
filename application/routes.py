@@ -1,64 +1,92 @@
-from application import app, db
-from application.models import Users
+from . import app, db
+from .models import Player, Team
+from .forms import TeamForm, PlayerForm
+from flask import redirect, url_for, request, render_template
 
-@app.route('/')
-@app.route('/home')
+@app.route("/")
 def home():
-    return '<h1>**** Welcome to NFL Fantasy! This is the home page. ***</h1>'
+    teams = Team.query.all()
+    players = Player.query.all()
 
-@app.route('/about')
-def about():
-    return '<h1>*** This is the about page ***</h1>'
+    return render_template("home.html", teams=teams, players=players)
 
-@app.route('/user/<user>')
-def username(user):
-    if user == 'Ollie':
-        return redirect(url_for('home'))
+@app.route("/create", methods=["GET", "POST"])
+def create():
+    form1 = TeamForm()
+    form2 = PlayerForm()
+
+    if request.method == "POST":
+        new_team = Team(
+            description=form1.description.data,
+            )
+        db.session.add(new_team)
+        db.session.commit()
+
+        return redirect(url_for("home"))
     else:
-        return f'<h1>Hi, {user}! What is up bro?</h1>'
 
-@app.route('/add/<taskname>')
-def add(taskname):
-    new_task = Tasks(name = taskname)
-    db.session.add(new_task)
-    db.session.commit()
-    return "<h1>Added new task to database</h1>"
+        return render_template("create_task.html", form=form1)
 
-@app.route('/read')
-def read():
-    all_tasks = Tasks.query.all()
-    tasks_string = ""
-    for tasks in all_tasks:
-        tasks_string += "<br>"+ str(tasks.id) + ". " + tasks.name
-    return f'<h1>{tasks_string}</h1>'
+@app.route("/create_label", methods=["GET", "POST"])
+def create_label():
+    form1 = TeamForm()
+    form2 = PlayerForm()
 
-@app.route('/update/<description>')
-def update(description):
-    first_task = Tasks.query.first()
-    first_task.description = description
-    db.session.commit()
-    return f'<h1>{first_task.description}</h1>'
+    teams = Team.query.all()
+    form2.team.choices = [(team.id, team.description) for team in teams]
 
-@app.route('/delete')
-def delete():
-    task_to_delete = Tasks.query.first()
-    db.session.delete(task_to_delete)
-    db.session.commit()
-    return "<h1>Task deleted!</h1>"
-
-@app.route('/count')
-def count():
-    num_tasks = Tasks.query.count()
-    return f'<h1>Number of tasks: {num_tasks}</h1>'
-
-@app.route('/completed/<bool>')
-def completed(bool):
-    completed_task = Tasks.query.first()
-    if bool == 'True':
-        completed_task.completed = True
+    if request.method == "POST":
+        new_player = Player(name=form2.name.data, team_id=form2.team.data)
+        db.session.add(new_player)
         db.session.commit()
-        return f'<h1><b>{completed_task.name}</b> has been completed!</h1>'
-    elif bool == 'False':
-        completed_task.completed = False
+        return redirect(url_for("home"))
+    else:
+        return render_template("create_label.html", form=form2)
+
+@app.route("/update/<int:id>/", methods=["GET", "POST"])
+def update(id):
+    team = Team.query.get(id)
+    form = TeamForm()
+
+    if request.method == "POST":
+        team.description = form.description.data
+        team.label_id = form.label.data
+        db.session.add(team)
         db.session.commit()
-        return f'<h1><b>{completed_task.name}</b> has not been completed yet!</h1>'
+
+        return redirect(url_for("home"))
+    else:
+        playerss = Player.query.all()
+        form.label.choices = [(label.id, label.name) for label in labels]
+
+        form.description.data = team.description
+
+        return render_template("create_task.html", form=form)
+
+@app.route("/delete/<int:id>")
+def delete(id):
+    team = Team.query.get(id)
+    db.session.delete(team)
+    db.session.commit()
+
+    return redirect(url_for("home"))
+
+@app.route("/complete/<int:id>")
+def complete(id):
+    team = Team.query.get(id)
+    team.completed = True
+    db.session.add(team)
+    db.session.commit()
+
+    return redirect(url_for("home"))
+
+@app.route("/incomplete/<int:id>")
+def incomplete(id):
+    team = Team.query.get(id)
+    team.completed = False
+    db.session.add(team)
+    db.session.commit()
+
+    return redirect(url_for("home"))
+
+    

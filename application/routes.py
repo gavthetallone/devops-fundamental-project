@@ -12,12 +12,11 @@ def home():
 
 @app.route("/create", methods=["GET", "POST"])
 def create():
-    form1 = TeamForm()
-    form2 = PlayerForm()
+    form = TeamForm()
 
     if request.method == "POST":
         new_team = Team(
-            description=form1.description.data,
+            description=form.description.data,
             )
         db.session.add(new_team)
         db.session.commit()
@@ -25,7 +24,7 @@ def create():
         return redirect(url_for("home"))
     else:
 
-        return render_template("create_task.html", form=form1)
+        return render_template("create_task.html", form=form)
 
 @app.route("/create_label", methods=["GET", "POST"])
 def create_label():
@@ -46,22 +45,23 @@ def create_label():
 @app.route("/update/<int:id>/", methods=["GET", "POST"])
 def update(id):
     team = Team.query.get(id)
-    form = TeamForm()
+    form1 = TeamForm()
+    form2 = PlayerForm()
 
     if request.method == "POST":
-        team.description = form.description.data
-        team.label_id = form.label.data
+        team.description = form1.description.data
+        team.players.id = form2.name.data
         db.session.add(team)
         db.session.commit()
 
         return redirect(url_for("home"))
     else:
-        playerss = Player.query.all()
-        form.label.choices = [(label.id, label.name) for label in labels]
+        players = Player.query.all()
+        form2.name.choices = [(player.id, player.team) for player in players]
 
-        form.description.data = team.description
+        form1.description.data = team.description
 
-        return render_template("create_task.html", form=form)
+        return render_template("create_task.html", form=form1)
 
 @app.route("/delete/<int:id>")
 def delete(id):

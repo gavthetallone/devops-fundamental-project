@@ -13,13 +13,25 @@
                 display: inline;
                 margin-left: 35px;
             }
+
+            .tab1 {
+                display: inline;
+                margin-left: 70px;
+            }
         </style>
     
-        <div class = "team">
-            <p class="tab" >
-            <span class="tab"></span>
+        <div class = "team", style="background-color:#e4fdff">
+            <hr>
+            <h4>{{ team.id }} - {{ team.description }}
+                
+                <span class="tab1"></span>
 
-            <h4>{{ team.id }} - {{ team.description }}</h4>
+                <a href="{{ url_for('update', id=team.id) }}">Update Team Name</a>
+            
+                <span class="tab"></span>
+
+                <a href="{{ url_for('delete', id=team.id) }}">Delete Team</a>
+            </h4>
 
             {% for player in players %}
             {% if player.team_id == team.id %}
@@ -27,30 +39,24 @@
 
                 {{ player.position }} - {{ player.name }} - {{ "✔️" if player.active else "❌" }}
                 <br>
-                <span class="tab"></span><span class="tab"></span>
+                <span class="tab1"></span>
 
                 <a href="{{ url_for('update_player', id=player.id) }}">Update Player</a>
                 <br>
                 {% if player.active %}
-                <span class="tab"></span><span class="tab"></span>
+                <span class="tab1"></span>
 
                 <a href="{{ url_for('incomplete', id=player.id) }}">Mark as Inactive</a>
                 {% else %}
-                <span class="tab"></span><span class="tab"></span>
+                <span class="tab1"></span>
 
                 <a href="{{ url_for('complete', id=player.id) }}">Mark as Active</a>
                 {% endif %}
                 <br>
+                <br>
             {% endif %}
             {% endfor %}
-            <h4>
-            <a href="{{ url_for('update', id=team.id) }}">Update Team Name</a>
-            
-            <span class="tab"></span>
-
-            <a href="{{ url_for('delete', id=team.id) }}">Delete Team</a>
-            </h4>
-            <br>
+            <hr>
         </div>
     {% endfor %}
 

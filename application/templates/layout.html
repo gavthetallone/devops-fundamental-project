@@ -1,6 +1,7 @@
 
 <body>
     <h1>Welcome to NFL Fantasy Football!</h1>
+    <hr>
     
     <h2>
     {% block title %}
@@ -25,7 +26,6 @@
         <a href="{{ url_for('create_label') }}">Create New Player</a>
         </h3>
     </div>
-    
     {% block body %}
     {% endblock body %}
 </body>

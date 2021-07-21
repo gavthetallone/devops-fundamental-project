@@ -6,8 +6,24 @@
 {% endblock title %}
 
 {% block body %}
+{% for league in leagues %}
+    <style>
+        .tab_league {
+            display: inline;
+            margin-left: 530px;
+        }
+    </style>
+
+    <h2>{{ league.id }} - {{ league.name }} 
+        <span class="tab_league"></span>
+        <a href="{{ url_for('update_league', id=league.id) }}">Update League Name</a>
+        &ensp;
+
+        <a href="{{ url_for('delete_league', id=league.id) }}">Delete League</a>
+    </h2>
 
     {% for team in teams %}
+    {% if team.league_id == league.id %}
         <style>
             .tab {
                 display: inline;
@@ -22,16 +38,19 @@
     
         <div class = "team", style="background-color:#e4fdff">
             <hr>
-            <h4>{{ team.id }} - {{ team.description }}
-                
+            <span class="tab"></span>
+            <h3>
+                {{ team.description }}   
                 <span class="tab1"></span>
 
-                <a href="{{ url_for('update', id=team.id) }}">Update Team Name</a>
+                <a href="{{ url_for('update_team', id=team.id) }}">Update Team Name</a>
             
-                <span class="tab"></span>
+                &ensp;
 
-                <a href="{{ url_for('delete', id=team.id) }}">Delete Team</a>
-            </h4>
+                <a href="{{ url_for('delete_team', id=team.id) }}">Delete Team</a>
+
+                <hr style="width:45%;text-align:left;margin-left:0">
+            </h3>
 
             {% for player in players %}
             {% if player.team_id == team.id %}
@@ -39,18 +58,19 @@
 
                 {{ player.position }} - {{ player.name }} - {{ "✔️" if player.active else "❌" }}
                 <br>
-                <span class="tab1"></span>
+                <span class="tab"></span>
 
                 <a href="{{ url_for('update_player', id=player.id) }}">Update Player</a>
-                <br>
+                &ensp;
+                <a href="{{ url_for('delete_player', id=player.id) }}">Delete Player</a>
+                &ensp;
+            
                 {% if player.active %}
-                <span class="tab1"></span>
 
-                <a href="{{ url_for('incomplete', id=player.id) }}">Mark as Inactive</a>
+                <a href="{{ url_for('inactive', id=player.id) }}">Mark as Inactive</a>
                 {% else %}
-                <span class="tab1"></span>
 
-                <a href="{{ url_for('complete', id=player.id) }}">Mark as Active</a>
+                <a href="{{ url_for('active', id=player.id) }}">Mark as Active</a>
                 {% endif %}
                 <br>
                 <br>
@@ -58,6 +78,8 @@
             {% endfor %}
             <hr>
         </div>
+        {% endif %}
     {% endfor %}
+{% endfor %}
 
 {% endblock body %}

@@ -73,18 +73,18 @@ def delete(id):
 
 @app.route("/complete/<int:id>")
 def complete(id):
-    team = Team.query.get(id)
-    team.completed = True
-    db.session.add(team)
+    player = Player.query.get(id)
+    player.active = True
+    db.session.add(player)
     db.session.commit()
 
     return redirect(url_for("home"))
 
 @app.route("/incomplete/<int:id>")
 def incomplete(id):
-    team = Team.query.get(id)
-    team.completed = False
-    db.session.add(team)
+    player = Player.query.get(id)
+    player.active = False
+    db.session.add(player)
     db.session.commit()
 
     return redirect(url_for("home"))

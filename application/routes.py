@@ -63,6 +63,33 @@ def update(id):
 
         return render_template("create_task.html", form=form1)
 
+@app.route("/update_player/<int:id>", methods=["GET", "POST"])
+def update_player(id):
+    player = Player.query.get(id)
+    form1 = TeamForm()
+    form2 = PlayerForm()
+
+    teams = Team.query.all()
+    form2.team.choices = [(team.id, team.description) for team in teams]
+
+    if request.method == "POST":
+        player.name = form2.name.data
+        player.position = form2.position.data
+        player.team_id = form2.team.data
+        db.session.add(player)
+        db.session.commit()
+
+        return redirect(url_for("home"))
+    else:
+        players = Player.query.all()
+        form2.name.choices = [(player.id, player.team) for player in players]
+
+        form2.name.data = player.name
+        form2.position.data = player.position
+        form2.team.data = player.team_id
+
+        return render_template("create_label.html", form=form2)
+
 @app.route("/delete/<int:id>")
 def delete(id):
     team = Team.query.get(id)

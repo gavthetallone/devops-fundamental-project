@@ -35,7 +35,7 @@ def create_label():
     form2.team.choices = [(team.id, team.description) for team in teams]
 
     if request.method == "POST":
-        new_player = Player(name=form2.name.data, team_id=form2.team.data)
+        new_player = Player(name=form2.name.data, position=form2.position.data, team_id=form2.team.data)
         db.session.add(new_player)
         db.session.commit()
         return redirect(url_for("home"))

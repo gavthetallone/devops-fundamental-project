@@ -22,7 +22,7 @@
             {% for player in players %}
             {% if player.team_id == team.id %}
             <span class="tab"></span>
-            {{ player.name }}
+            {{ player.position }} - {{ player.name }}
                 <br>
             {% endif %}
             {% endfor %}

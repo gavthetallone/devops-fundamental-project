@@ -7,5 +7,6 @@ class TeamForm(FlaskForm):
 
 class PlayerForm(FlaskForm):
     name = StringField("Who is the player?")
+    position = SelectField("Which position?", choices=["QB", "RB", "WR", "TE", "K", "DEF"])
     team = SelectField("Choose a team", choices=[])
     submit = SubmitField("Submit")

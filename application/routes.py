@@ -85,7 +85,6 @@ def update_league(id):
 def update_team(id):
     team = Team.query.get(id)
     form1 = TeamForm()
-    form2 = LeagueForm()
 
     if request.method == "POST":
         team.description = form1.description.data
@@ -106,7 +105,6 @@ def update_team(id):
 @app.route("/update_player/<int:id>", methods=["GET", "POST"])
 def update_player(id):
     player = Player.query.get(id)
-    form1 = TeamForm()
     form2 = PlayerForm()
 
     teams = Team.query.all()

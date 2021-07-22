@@ -8,12 +8,12 @@ class Team(db.Model):
 
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), nullable=False)
-    position = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    position = db.Column(db.String(10), nullable=False)
     active = db.Column(db.Boolean, nullable=False, default=True)
     team_id = db.Column(db.Integer, db.ForeignKey("team.id"))
 
 class League(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
     teams = db.relationship('Team', backref="league")

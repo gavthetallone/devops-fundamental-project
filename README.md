@@ -10,6 +10,7 @@
 * [Entity-Relationship-Diagram](#entity-relationship-diagram)
 * [Unit-Testing-in-VS-Code](#unit-testing-in-vs-code)
 * [Unit-Testing-with-CI-server](#unit-testing-with-ci-server)
+* [Front-End](#front-end)
 ---
 <br>
 
@@ -146,3 +147,60 @@ Here is the webhook configured to trigger a Jenkins build once there has been a 
 
 ![Image of webhook](./images/webhook.png)
 
+---
+<br>
+
+## Front-End
+
+Here is what the user sees when they first open the application:
+
+![Image of home page](./images/front-end-home.png)
+
+---
+<br>
+
+The user can first create a fantasy league by clicking "Create New League":
+
+![Image of create league form](./images/front-end-create-league.png)
+
+---
+<br>
+
+When the user has filled in the form and clicked "Submit", the user will be redirected to the home page where the fantasy league will be displayed:
+
+![Image of league created on home page](./images/front-end-home-league.png)
+
+---
+<br>
+
+Now the user can create a team to go into that league by clicking "Create New Team":
+
+![Image of create team form](./images/front-end-create-team.png)
+
+---
+<br>
+
+Now the user can fill in the form with the team name and select the league from the drop-down list. Again, the user will be redirected to the home page to see the fantasy league has been populated by the newly created team:
+
+![Image of team created on home page](./images/front-end-home-team.png)
+
+---
+<br>
+
+The user can add a player to this team by clicking "Create New Player":
+
+![Image of create player form](./images/front-end-create-player.png)
+
+---
+<br>
+
+From here, the user can fill in the player name, select the player position from the drop-down list, and select the team from the other drop-down list. When the user gets redirected again, the user will find the newly created player added to the selected team:
+
+![Image of player created on home page](./images/front-end-home-player.png)
+
+---
+<br>
+
+If the user wishes to add a player to the bench, they can mark the player as inactive by clicking on "Mark as Inactive" like so:
+
+![Image of player marked inactive](./images/front-end-home-inactive.png)

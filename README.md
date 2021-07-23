@@ -8,7 +8,8 @@
 * [Risk-Assessment](#risk-assessment)  
 * [Scrum-Board](#scrum-board)
 * [Entity-Relationship-Diagram](#entity-relationship-diagram)
-* [Unit-Testing](#unit-testing)
+* [Unit-Testing-in-VS-Code](#unit-testing-in-vs-code)
+* [Unit-Testing-with-CI-server](#unit-testing-with-ci-server)
 ---
 <br>
 
@@ -109,7 +110,7 @@ Here is the final version of the ERD, created to reflect the change in CRUD func
 ---
 <br>
 
-## Unit-Testing
+## Unit-Testing-in-VS-Code
 
 Here is the testing output carried out after completing the application, giving 100% coverage of the "application" directory:
 
@@ -118,7 +119,7 @@ Here is the testing output carried out after completing the application, giving 
 ---
 <br>
 
-## Unit-Testing with CI server
+## Unit-Testing-with-CI-server
 
 Here is the testing output using Jenkins with JUnit and Cobertura coverage reports:
 
@@ -138,5 +139,10 @@ Here is the JUnit test output, split up into each test class:
 
 ![Image of JUnit test output](./images/junit-test.png)
 
+---
+<br>
 
+Here is the webhook configured to trigger a Jenkins build once there has been a push to GitHub:
+
+![Image of webhook](./images/webhook.png)
 

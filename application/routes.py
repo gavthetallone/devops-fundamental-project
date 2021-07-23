@@ -1,64 +1,173 @@
-from application import app, db
-from application.models import Users
+from . import app, db
+from .models import Player, Team, League
+from .forms import TeamForm, PlayerForm, LeagueForm
+from flask import redirect, url_for, request, render_template
 
-@app.route('/')
-@app.route('/home')
+@app.route("/")
 def home():
-    return '<h1>**** Welcome to NFL Fantasy! This is the home page. ***</h1>'
+    teams = Team.query.all()
+    players = Player.query.all()
+    leagues = League.query.all()
 
-@app.route('/about')
-def about():
-    return '<h1>*** This is the about page ***</h1>'
+    return render_template("home.html", teams=teams, players=players, leagues=leagues)
 
-@app.route('/user/<user>')
-def username(user):
-    if user == 'Ollie':
-        return redirect(url_for('home'))
+@app.route("/create_league", methods=["GET", "POST"])
+def create_league():
+    form = LeagueForm()
+
+    if request.method == "POST":
+        new_league = League(
+            name=form.name.data,
+            )
+        db.session.add(new_league)
+        db.session.commit()
+
+        return redirect(url_for("home"))
+
+    return render_template("create_league.html", form=form)
+
+
+@app.route("/create_team", methods=["GET", "POST"])
+def create_team():
+    form1 = LeagueForm()
+    form2 = TeamForm()
+
+    leagues = League.query.all()
+    form2.league.choices = [(league.id, league.name) for league in leagues]
+
+    if request.method == "POST":
+        new_team = Team(
+            description=form2.description.data,
+            league_id=form2.league.data
+            )
+        db.session.add(new_team)
+        db.session.commit()
+
+        return redirect(url_for("home"))
     else:
-        return f'<h1>Hi, {user}! What is up bro?</h1>'
+        return render_template("create_task.html", form=form2)
 
-@app.route('/add/<taskname>')
-def add(taskname):
-    new_task = Tasks(name = taskname)
-    db.session.add(new_task)
-    db.session.commit()
-    return "<h1>Added new task to database</h1>"
+@app.route("/create_player", methods=["GET", "POST"])
+def create_player():
+    form1 = TeamForm()
+    form2 = PlayerForm()
 
-@app.route('/read')
-def read():
-    all_tasks = Tasks.query.all()
-    tasks_string = ""
-    for tasks in all_tasks:
-        tasks_string += "<br>"+ str(tasks.id) + ". " + tasks.name
-    return f'<h1>{tasks_string}</h1>'
+    teams = Team.query.all()
+    form2.team.choices = [(team.id, team.description) for team in teams]
 
-@app.route('/update/<description>')
-def update(description):
-    first_task = Tasks.query.first()
-    first_task.description = description
-    db.session.commit()
-    return f'<h1>{first_task.description}</h1>'
-
-@app.route('/delete')
-def delete():
-    task_to_delete = Tasks.query.first()
-    db.session.delete(task_to_delete)
-    db.session.commit()
-    return "<h1>Task deleted!</h1>"
-
-@app.route('/count')
-def count():
-    num_tasks = Tasks.query.count()
-    return f'<h1>Number of tasks: {num_tasks}</h1>'
-
-@app.route('/completed/<bool>')
-def completed(bool):
-    completed_task = Tasks.query.first()
-    if bool == 'True':
-        completed_task.completed = True
+    if request.method == "POST":
+        new_player = Player(name=form2.name.data, position=form2.position.data, team_id=form2.team.data)
+        db.session.add(new_player)
         db.session.commit()
-        return f'<h1><b>{completed_task.name}</b> has been completed!</h1>'
-    elif bool == 'False':
-        completed_task.completed = False
+        return redirect(url_for("home"))
+    else:
+        return render_template("create_label.html", form=form2)
+
+@app.route("/update_league/<int:id>/", methods=["GET", "POST"])
+def update_league(id):
+    league = League.query.get(id)
+    form = LeagueForm()
+
+    if request.method == "POST":
+        league.name = form.name.data
+        db.session.add(league)
         db.session.commit()
-        return f'<h1><b>{completed_task.name}</b> has not been completed yet!</h1>'
+
+        return redirect(url_for("home"))
+    else:
+        form.name.data = league.name
+
+    return render_template("create_league.html", form=form)
+
+
+
+@app.route("/update_team/<int:id>/", methods=["GET", "POST"])
+def update_team(id):
+    team = Team.query.get(id)
+    form1 = TeamForm()
+
+    if request.method == "POST":
+        team.description = form1.description.data
+        team.league_id = form1.league.data
+        db.session.add(team)
+        db.session.commit()
+
+        return redirect(url_for("home"))
+    else:
+        leagues = League.query.all()
+        form1.league.choices = [(league.id, league.name) for league in leagues]
+
+        form1.description.data = team.description
+        form1.league.data = team.league_id
+
+        return render_template("create_task.html", form=form1)
+
+@app.route("/update_player/<int:id>", methods=["GET", "POST"])
+def update_player(id):
+    player = Player.query.get(id)
+    form2 = PlayerForm()
+
+    teams = Team.query.all()
+    form2.team.choices = [(team.id, team.description) for team in teams]
+
+    if request.method == "POST":
+        player.name = form2.name.data
+        player.position = form2.position.data
+        player.team_id = form2.team.data
+        db.session.add(player)
+        db.session.commit()
+
+        return redirect(url_for("home"))
+    else:
+        players = Player.query.all()
+        form2.name.choices = [(player.id, player.team) for player in players]
+
+        form2.name.data = player.name
+        form2.position.data = player.position
+        form2.team.data = player.team_id
+
+        return render_template("create_label.html", form=form2)
+
+@app.route("/delete_league/<int:id>")
+def delete_league(id):
+    league = League.query.get(id)
+    db.session.delete(league)
+    db.session.commit()
+
+    return redirect(url_for("home"))
+
+@app.route("/delete_team/<int:id>")
+def delete_team(id):
+    team = Team.query.get(id)
+    db.session.delete(team)
+    db.session.commit()
+
+    return redirect(url_for("home"))
+
+@app.route("/delete_player/<int:id>")
+def delete_player(id):
+    player = Player.query.get(id)
+    db.session.delete(player)
+    db.session.commit()
+
+    return redirect(url_for("home"))
+
+@app.route("/active/<int:id>")
+def active(id):
+    player = Player.query.get(id)
+    player.active = True
+    db.session.add(player)
+    db.session.commit()
+
+    return redirect(url_for("home"))
+
+@app.route("/inactive/<int:id>")
+def inactive(id):
+    player = Player.query.get(id)
+    player.active = False
+    db.session.add(player)
+    db.session.commit()
+
+    return redirect(url_for("home"))
+
+    

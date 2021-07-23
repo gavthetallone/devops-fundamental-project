@@ -19,7 +19,7 @@
         <a href="{{ url_for('update_league', id=league.id) }}">Update League Name</a>
         &ensp;
 
-        <a href="{{ url_for('delete_league', id=league.id) }}">Delete League</a>
+        <a href="{{ url_for('delete_league', id=league.id) }}", style="color:red">Delete League</a>
     </h2>
 
     {% for team in teams %}
@@ -47,9 +47,10 @@
             
                 &ensp;
 
-                <a href="{{ url_for('delete_team', id=team.id) }}">Delete Team</a>
+                <a href="{{ url_for('delete_team', id=team.id) }}", style="color:red">Delete Team</a>
 
-                <hr style="width:48%;text-align:left;margin-left:0">
+                <!-- <hr style="width:48%;text-align:left;margin-left:0"> -->
+                <hr>
             </h3>
 
             {% for player in players %}
@@ -62,7 +63,7 @@
 
                 <a href="{{ url_for('update_player', id=player.id) }}">Update Player</a>
                 &ensp;
-                <a href="{{ url_for('delete_player', id=player.id) }}">Delete Player</a>
+                <a href="{{ url_for('delete_player', id=player.id) }}", style="color:red">Delete Player</a>
                 &ensp;
             
                 {% if player.active %}

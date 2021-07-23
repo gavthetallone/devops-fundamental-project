@@ -122,6 +122,13 @@ Here is the testing output carried out after completing the application, giving 
 
 ## Unit-Testing-with-CI-server
 
+Here is the code used to create the Jenkins build. It is essentially all of the code a developer would need to input into the terminal of the VM if they were to run pytest. This code also produces a coverage report linked with Cobertura and a unit test evaluation with JUnit:
+
+![Image of Jenkins code](./images/jenkins-code.png)
+
+---
+<br>
+
 Here is the testing output using Jenkins with JUnit and Cobertura coverage reports:
 
 ![Image of Jenkins output](./images/jenkins-output.png)
@@ -204,3 +211,31 @@ From here, the user can fill in the player name, select the player position from
 If the user wishes to add a player to the bench, they can mark the player as inactive by clicking on "Mark as Inactive" like so:
 
 ![Image of player marked inactive](./images/front-end-home-inactive.png)
+
+---
+<br>
+
+## Future Improvements
+
+For future sprints I would:
+* Implement integration testing with Selenium.
+* Add a user login feature to improve the security of data stored in the SQL database.
+* Add a scoring system and a matchup schedule, where the user can view a leaderboard for their league and view previous/upcoming matchups.
+* Add player statistics. This will then link with the scoring system e.g. points for number of touchdowns scored in a match.
+* Add a player draft system where users can, in turn, select players for their team from a pre-populated database of players.
+
+---
+<br>
+
+## Author
+
+Gavin Williams
+
+---
+<br>
+
+## Acknowledgements
+
+* [Oliver Nichols](https://github.com/OliverNichols/)
+* Ryan Wright
+* Victoria Sacre

@@ -14,7 +14,8 @@
         }
     </style>
 
-    <h2>{{ league.id }} - {{ league.name }} 
+    <h2>
+        &emsp;{{ league.name }} 
         <span class="tab_league"></span>
         <a href="{{ url_for('update_league', id=league.id) }}">Update League Name</a>
         &ensp;
@@ -39,7 +40,7 @@
         <div class = "team", style="background-color:#e4fdff">
             <hr>
             <h3>
-                &emsp;
+                &emsp;&emsp;
                 {{ team.description }}   
                 <span class="tab1"></span>
 
@@ -56,11 +57,11 @@
             {% for player in players %}
             {% if player.team_id == team.id %}
                 <span class="tab"></span>
-
+                &emsp;
                 {{ player.position }} - {{ player.name }} - {{ "✔️" if player.active else "❌" }}
                 <br>
                 <span class="tab"></span>
-
+                &emsp;
                 <a href="{{ url_for('update_player', id=player.id) }}">Update Player</a>
                 &ensp;
                 <a href="{{ url_for('delete_player', id=player.id) }}", style="color:red">Delete Player</a>

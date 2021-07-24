@@ -137,6 +137,9 @@ Here is the final version of the ERD, created to reflect the change in CRUD func
 
 ![Image of revised ERD](./images/ERD-revised.jpeg)
 
+This can be read as:  
+One league can have many teams. One team can have many players. Many players can only be in one team. Many teams can only be in one league.
+
 <br><br>
 
 ## Development
@@ -145,7 +148,7 @@ Here is the final version of the ERD, created to reflect the change in CRUD func
 
 ### Unit Testing in VS Code
 
-For the unit testing phase, I wrote tests to check that all of the [CRUD functionality](#crud-functionality) was working.
+For the unit testing phase, I wrote tests to check that all of the [CRUD functionality](#crud-functionality) was working. These classes, such as "TestCreate", can be further broken down into functions, such as "test_create_league".
 
 Here is the testing output carried out after completing the application, giving 100% coverage of the "application" directory:
 
@@ -173,7 +176,7 @@ Here is the Cobertura coverage report, which shows 100% coverage across all area
 
 <br><br>
 
-Here is the JUnit test output, which reports 0 failures for every test class:
+Here is the JUnit test output, which reports 0 failures for every function in every test class:
 
 ![Image of JUnit test output](./images/junit-test.png)
 

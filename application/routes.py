@@ -45,7 +45,7 @@ def create_team():
 
         return redirect(url_for("home"))
     else:
-        return render_template("create_task.html", form=form2)
+        return render_template("create_team.html", form=form2)
 
 @app.route("/create_player", methods=["GET", "POST"])
 def create_player():
@@ -61,7 +61,7 @@ def create_player():
         db.session.commit()
         return redirect(url_for("home"))
     else:
-        return render_template("create_label.html", form=form2)
+        return render_template("create_player.html", form=form2)
 
 @app.route("/update_league/<int:id>/", methods=["GET", "POST"])
 def update_league(id):
@@ -100,7 +100,7 @@ def update_team(id):
         form1.description.data = team.description
         form1.league.data = team.league_id
 
-        return render_template("create_task.html", form=form1)
+        return render_template("create_team.html", form=form1)
 
 @app.route("/update_player/<int:id>", methods=["GET", "POST"])
 def update_player(id):
@@ -126,7 +126,7 @@ def update_player(id):
         form2.position.data = player.position
         form2.team.data = player.team_id
 
-        return render_template("create_label.html", form=form2)
+        return render_template("create_player.html", form=form2)
 
 @app.route("/delete_league/<int:id>")
 def delete_league(id):
